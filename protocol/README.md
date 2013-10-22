@@ -22,52 +22,10 @@ Create the app.
 
     suspenders app --heroku true --github organization/app
 
-Create iOS app
---------------
-
-Create a new project in Xcode with these settings:
-
-* Check 'Create local git repository for this project'.
-* Check 'Use Automatic Reference Counting'.
-* Set an appropriate 2 or 3 letter class prefix.
-* Set the Base SDK to 'Latest iOS'.
-* Set the iOS Deployment Target to 6.0.
-* Use the Apple LLVM compiler.
-
-Get liftoff.
-
-    gem install liftoff
-
-Run liftoff in the project directory.
-
-    liftoff
-
 Set up Rails app
 ----------------
 
-Get the code.
-
-    git clone git@github.com:organization/app.git
-
-Set up the app's dependencies.
-
-    cd project
-    ./bin/setup
-
-Use [Heroku config](https://github.com/ddollar/heroku-config) to get `ENV`
-variables.
-
-    heroku config:pull --remote staging
-
-Delete extra lines in `.env`, leaving only those needed for app to function
-properly. For example: `BRAINTREE_MERCHANT_ID` and `S3_SECRET`.
-
-Use [Foreman](http://goo.gl/oy4uw) to run the app locally.
-
-    foreman start
-
-It uses your `.env` file and `Procfile` to run processes just like Heroku's
-[Cedar](https://devcenter.heroku.com/articles/cedar/) stack.
+Refer to individual apps for set-up directions.
 
 Maintain a Rails app
 --------------------
@@ -80,49 +38,6 @@ Maintain a Rails app
 * Use a [pull request] for code reviews.
 
 [pull request]: http://goo.gl/Kmdee
-
-Write a feature
----------------
-
-Create a local feature branch based off master.
-
-    git checkout master
-    git pull
-    git checkout -b <branch-name>
-
-Prefix the branch name with your initials.
-
-Rebase frequently to incorporate upstream changes.
-
-    git fetch origin
-    git rebase origin/master
-
-Resolve conflicts. When feature is complete and tests pass, stage the changes.
-
-    rake
-    git add --all
-
-When you've staged the changes, commit them.
-
-    git status
-    git commit --verbose
-
-Write a [good commit message](http://goo.gl/w11us). Example format:
-
-    Present-tense summary under 50 characters
-
-    * More information about commit (under 72 characters).
-    * More information about commit (under 72 characters).
-
-    http://project.management-system.com/ticket/123
-
-Share your branch.
-
-    git push origin <branch-name>
-
-Submit a [GitHub pull request](http://goo.gl/Kmdee).
-
-Ask for a code review in [Campfire](http://campfirenow.com).
 
 Review code
 -----------
@@ -171,51 +86,3 @@ Delete your remote feature branch.
 Delete your local feature branch.
 
     git branch --delete <branch-name>
-
-Deploy
-------
-
-View a list of new commits. View changed files. Deploy to
-[Heroku](https://devcenter.heroku.com/articles/quickstart) staging.
-
-    git fetch staging
-    git log staging/master..master
-    git diff --stat staging/master
-    git push staging
-
-If necessary, run migrations and restart the dynos.
-
-    heroku run rake db:migrate --remote staging
-    heroku restart --remote staging
-
-[Introspect](http://goo.gl/tTgVF) to make sure everything's ok.
-
-    watch heroku ps --remote staging
-
-Test the feature in browser.
-
-Deploy to production.
-
-    git fetch production
-    git log production/master..master
-    git diff --stat production/master
-    git push production
-    heroku run rake db:migrate --remote production
-    heroku restart --remote production
-    watch heroku ps --remote production
-
-Watch logs and metrics dashboards.
-
-Close pull request and comment `Merged.`
-
-Set Up Production Environment
------------------------------
-
-* Make sure that your [`Procfile`] is set up to run Unicorn.
-* Make sure the PG Backups add-on is enabled.
-* Create a read-only [Heroku Follower] for your production database. If a Heroku
-  database outage occurs, Heroku can use the follower to get your app back up
-  and running faster.
-
-[Heroku Follower]: http://goo.gl/xWDMx
-[`Procfile`]: https://devcenter.heroku.com/articles/procfile

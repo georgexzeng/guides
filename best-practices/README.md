@@ -137,12 +137,11 @@ Background Jobs
 Email
 -----
 
-* Use [SendGrid] or [Amazon SES] to deliver email in staging and production
-  environments.
+* Use [SendGrid] to deliver email in production
+  environment.
 * Use a tool like [mail_view] to look at each created or updated mailer view
   before merging.
 
-[Amazon SES]: http://goo.gl/A5jAA
 [SendGrid]: http://goo.gl/Kxu9W
 [mail_view]: http://goo.gl/HhX8y
 
@@ -181,9 +180,3 @@ Browsers
 
 * Don't support clients without Javascript.
 * Don't support IE6 or IE7.
-
-Objective-C
------------
-
-* Prefer categories on `Foundation` classes to helper methods.
-* Prefer string constants to literals when providing keys or key paths to methods.
